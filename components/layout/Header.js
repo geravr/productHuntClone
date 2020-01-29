@@ -29,6 +29,7 @@ const Header = () => {
 
                             <Button
                             bgColor="true"
+                            onClick={() => firebase.logout()}
                             > Cerrar Sesión</Button>
                         </>
                     ) : (

@@ -25,6 +25,11 @@ class Firebase {
       
     }
 
+    // Cierra la sesión del usuario
+    async logout() {
+        await this.auth.signOut();
+    }
+
 }
 
 const firebase = new Firebase();
