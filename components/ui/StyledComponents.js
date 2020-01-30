@@ -15,10 +15,11 @@ export const HeaderStyled = styled.header`
 `;
 export const Logo = styled.p`
     color: var(--naranja);
-    font-size: 4rem;
+    font-size: 3rem;
     font-family: 'Roboto Slab', serif;
     line-height: 0;
     font-weight: 700;
+    margin-bottom: 0;
     
     &:hover {
         cursor: pointer;
@@ -95,6 +96,12 @@ export const Form = styled.form`
     max-width: 600px;
     width: 95%;
     margin: 5rem auto 0 auto;
+    fieldset {
+        margin: 1rem 0;
+        border: 1px solid #e1e1e1;
+        font-size: 2rem;
+        padding: 2rem;
+    }
 `;
 export const Input = styled.div`
     margin-bottom: 2rem;
@@ -105,9 +112,12 @@ export const Input = styled.div`
         flex: 0 0 150px;
         font-size: 1.8rem;
     }
-    input {
+    input, textarea {
         flex: 1;
         padding: 1rem;
+    }
+    textarea {
+        height: 200px;
     }
 `;
 export const InputSubmitForm = styled.input`
