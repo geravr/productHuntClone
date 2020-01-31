@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import Layout from '../components/layout/Layout'
 import Router from 'next/router';
-import { Form, Input, InputSubmitForm, H1Center, Error, Success } from '../components/ui/StyledComponents';
+import { MDBContainer, MDBRow, MDBCol, MDBBtn, MDBInput, MDBBadge } from 'mdbreact';
 
 import firebase from '../firebase';
 
@@ -41,63 +41,77 @@ const NewAccount = () => {
   }
 
   return (
-    <div>
-      <Layout>
-        <>
-          <H1Center>Crear Cuenta</H1Center>
-          <Form
-          onSubmit={handleSubmit}
-          noValidate
-          >
-            { errors.name && <Error>{errors.name}</Error>}
-            <Input>
-              <label htmlFor="name">Nombre</label>
-              <input
-              type="text"
-              id="name"
-              placeholder="Tu nombre"
-              name="name"
-              value={name}
-              onChange={handleChange}
-              />
-            </Input>
-
-            { errors.email && <Error>{errors.email}</Error>}
-            {error && <Error>{error}</Error> }
-            <Input>
-              <label htmlFor="email">Correo</label>
-              <input
-              type="email"
-              id="email"
-              placeholder="Tu correo"
-              name="email"
-              value={email}
-              onChange={handleChange}
-              />
-            </Input>
-
-            { errors.password && <Error>{errors.password}</Error>}
-            <Input>
-              <label htmlFor="password">Contraseña</label>
-              <input
-              type="password"
-              id="password"
-              placeholder="Tu contraseña"
-              name="password"
-              value={password}
-              onChange={handleChange}
-              />
-            </Input>
-            <InputSubmitForm
-            type="submit"
-            value="Crear cuenta"
-            />
-          </Form>
-          {success && <Success>Cuenta creada correctamente</Success> }
-        </>
-      </Layout>
-    </div>
-  )
+    <Layout>
+      <>
+        <MDBContainer>
+          <MDBRow>
+            <MDBCol md="6" className="mx-auto mt-5">
+              <form onSubmit={handleSubmit} noValidate>
+                <p className="h3 text-center mb-4">Registrarse</p>
+                <div className="grey-text">
+                  {errors.name && (
+                    <MDBBadge color="danger">{errors.name}</MDBBadge>
+                  )}
+                  <MDBInput
+                    label="Tu nombre"
+                    icon="user"
+                    group
+                    type="text"
+                    validate
+                    error="wrong"
+                    success="right"
+                    name="name"
+                    id="name"
+                    value={name}
+                    onChange={handleChange}
+                  />
+                  {errors.email && (
+                    <MDBBadge color="danger">{errors.email}</MDBBadge>
+                  )}
+                  {error && <MDBBadge color="danger">{error}</MDBBadge>}
+                  <MDBInput
+                    label="Tu correo"
+                    icon="envelope"
+                    group
+                    type="email"
+                    validate
+                    error="wrong"
+                    success="right"
+                    id="email"
+                    name="email"
+                    value={email}
+                    onChange={handleChange}
+                  />
+                  {errors.password && (
+                    <MDBBadge color="danger">{errors.password}</MDBBadge>
+                  )}
+                  <MDBInput
+                    label="Tu contraseña"
+                    icon="lock"
+                    group
+                    type="password"
+                    validate
+                    id="password"
+                    name="password"
+                    value={password}
+                    onChange={handleChange}
+                  />
+                </div>
+                <div className="text-center">
+                  <MDBBtn type="submit" color="elegant">
+                    Crear cuenta
+                  </MDBBtn>
+                </div>
+              </form>
+              {success && (
+                <MDBBadge color="success">Cuenta creada correctamente</MDBBadge>
+              )}
+            </MDBCol>
+          </MDBRow>
+        </MDBContainer>
+      </>
+    </Layout>
+  );
 }
 
 export default NewAccount;

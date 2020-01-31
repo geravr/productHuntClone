@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import Layout from '../components/layout/Layout'
 import Router from 'next/router';
 import { Form, Input, InputSubmitForm, H1Center, Error, Success } from '../components/ui/StyledComponents';
+import { MDBContainer, MDBRow, MDBCol, MDBInput, MDBBtn, MDBBadge } from 'mdbreact';
 
 import firebase from '../firebase';
 
@@ -44,43 +45,48 @@ async function login() {
     <div>
       <Layout>
         <>
-          <H1Center>Iniciar Sesión</H1Center>
-          <Form
-          onSubmit={handleSubmit}
-          noValidate
-          >
-            { errors.email && <Error>{errors.email}</Error>}
-            {error && <Error>{error}</Error> }
-            <Input>
-              <label htmlFor="email">Correo</label>
-              <input
-              type="email"
-              id="email"
-              placeholder="Tu correo"
-              name="email"
-              value={email}
-              onChange={handleChange}
+        <MDBContainer>
+      <MDBRow>
+        <MDBCol md="6" className="mx-auto mt-5">
+          <form onSubmit={handleSubmit} noValidate className="needs-validation">
+            <p className="h3 text-center mb-4">Iniciar Sesión</p>
+            <div className="grey-text">
+              { errors.email && <MDBBadge color="danger">{errors.email}</MDBBadge>}
+              {error && <MDBBadge color="danger">{error}</MDBBadge> }
+              <MDBInput
+                label="Tu correo"
+                icon="envelope"
+                group
+                type="email"
+                validate
+                error="wrong"
+                success="right"
+                id="email"
+                name="email"
+                value={email}
+                onChange={handleChange}
               />
-            </Input>
-
-            { errors.password && <Error>{errors.password}</Error>}
-            <Input>
-              <label htmlFor="password">Contraseña</label>
-              <input
-              type="password"
-              id="password"
-              placeholder="Tu contraseña"
-              name="password"
-              value={password}
-              onChange={handleChange}
+              { errors.password && <MDBBadge color="danger">{errors.password}</MDBBadge>}
+              <MDBInput
+                label="Contraseña"
+                icon="lock"
+                group
+                type="password"
+                validate
+                id="password"
+                name="password"
+                value={password}
+                onChange={handleChange}
               />
-            </Input>
-            <InputSubmitForm
-            type="submit"
-            value="Iniciar sesión"
-            />
-          </Form>
-          {success && <Success>Bienvenid@</Success> }
+            </div>
+            <div className="text-center">
+              <MDBBtn type="submit" color="elegant">Login</MDBBtn>
+            </div>
+          </form>
+          {success && <MDBBadge color="success">Bienvenid@</MDBBadge> }
+        </MDBCol>
+      </MDBRow>
+    </MDBContainer>
         </>
       </Layout>
     </div>
