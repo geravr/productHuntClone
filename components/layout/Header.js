@@ -15,7 +15,6 @@ const Header = () => {
        const [ currentPath, setCurrentPath ] = useState('');
        useEffect(() =>{
            setCurrentPath(window.location.pathname);
-           console.log(currentPath)
        });
 
 
@@ -28,7 +27,7 @@ const Header = () => {
 
     const { user, firebase } = useContext(FirebaseContext);
     return ( 
-        <MDBNavbar color="red" dark expand="md">
+        <MDBNavbar color="orange darken-4" dark expand="md">
         <MDBContainer>
           <MDBNavbarBrand>
             <Logo className="white-text">P</Logo>
@@ -88,12 +87,12 @@ const Header = () => {
                   <>
                   <MDBNavItem>
                   <Link href="/login">
-                      <MDBBtn color="white" size="sm">Login</MDBBtn>
+                    <a><MDBBtn color="white" size="sm">Login</MDBBtn></a>
                   </Link>
                   </MDBNavItem>
                   <MDBNavItem>
                   <Link href="/new-account">
-                      <MDBBtn outline color="white" size="sm">Crear Cuenta</MDBBtn>
+                      <a><MDBBtn outline color="white" size="sm">Crear Cuenta</MDBBtn></a>
                   </Link>
                   </MDBNavItem>
                   </>

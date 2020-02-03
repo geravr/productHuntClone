@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import Layout from '../components/layout/Layout'
 import Router from 'next/router';
-import { Form, Input, InputSubmitForm, H1Center, Error, Success } from '../components/ui/StyledComponents';
+import { Form } from '../components/ui/StyledComponents';
 import { MDBContainer, MDBRow, MDBCol, MDBInput, MDBBtn, MDBBadge } from 'mdbreact';
 
 import firebase from '../firebase';
@@ -48,7 +48,7 @@ async function login() {
         <MDBContainer>
       <MDBRow>
         <MDBCol md="6" className="mx-auto mt-5">
-          <form onSubmit={handleSubmit} noValidate className="needs-validation">
+          <Form onSubmit={handleSubmit} noValidate className="login-input">
             <p className="h3 text-center mb-4">Iniciar Sesión</p>
             <div className="grey-text">
               { errors.email && <MDBBadge color="danger">{errors.email}</MDBBadge>}
@@ -80,9 +80,9 @@ async function login() {
               />
             </div>
             <div className="text-center">
-              <MDBBtn type="submit" color="elegant">Login</MDBBtn>
+              <MDBBtn type="submit" color="elegant">Ingresar</MDBBtn>
             </div>
-          </form>
+          </Form>
           {success && <MDBBadge color="success">Bienvenid@</MDBBadge> }
         </MDBCol>
       </MDBRow>

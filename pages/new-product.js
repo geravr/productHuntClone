@@ -1,8 +1,9 @@
-import React, { useState, useContext } from 'react'
+import React, { useState, useContext, useEffect } from 'react'
 import Layout from '../components/layout/Layout'
 import Router, { useRouter } from 'next/router';
 import FileUploader from 'react-firebase-file-uploader';
 import { Form, Input, InputSubmitForm, H1Center, Error, Success } from '../components/ui/StyledComponents';
+import { MDBContainer, MDBRow, MDBCol, MDBBtn, MDBIcon, MDBInput, MDBBadge } from 'mdbreact';
 
 import { FirebaseContext } from '../firebase';
 
@@ -23,7 +24,7 @@ const INITIAL_STATE = {
 const NewProduct = () => {
 
   // State de imagenes
-  const [ imageName, setImageName ] = useState('');
+  const [ imageName, setImageName ] = useState('Selecciona una imagen');
   const [ uploading, setUploading ] = useState(false);
   const [ progress, setProgress ] = useState(0);
   const [ imageUrl, setImageUrl ] = useState('');
@@ -56,7 +57,7 @@ const NewProduct = () => {
   };
 
 
-  const [error, setError] = useState(false);
+  // const [error, setError] = useState(false);
   const [success, setSuccess] = useState(false);
 
   const { values, errors, handleSubmit, handleChange } = useValidation(INITIAL_STATE, validateNewProduct, newProduct);
@@ -90,103 +91,128 @@ const NewProduct = () => {
     firebase.db.collection('products').add(product);
     return router.push('/')
   }
-  
 
-  // Crear cuenta en firebase
-  async function newAccount() {
-    try {
-      await firebase.register(name, email, password);
-      setTimeout(() => {
-        Router.push('/');
-      }, 1500);
-      setError(false);
-      setSuccess(true);
-    } catch (error) {
-      console.error('Hubo un error al crear la cuenta', error.message);
-      setError(error.message);
-    }
-
-  }
+  //Path de imagen
+  const [ currentPathImage, setCurrentPathImage ] = useState('Selecciona una imagen');
+  useEffect(() =>{
+      if (document.getElementById('image').files[0] != undefined) {
+        setCurrentPathImage(document.getElementById('image').files[0].name);
+      }
+  });
 
   return (
     <div>
       <Layout>
         <>
-          <H1Center>Nuevo Producto</H1Center>
-          <Form onSubmit={handleSubmit} noValidate>
-            <fieldset>
-              <legend>Información General</legend>
-
-              {errors.name && <Error>{errors.name}</Error>}
-              <Input>
-                <label htmlFor="name">Nombre</label>
-                <input
-                  type="text"
-                  id="name"
-                  placeholder="Nombre del producto"
-                  name="name"
-                  value={name}
-                  onChange={handleChange}
-                />
-              </Input>
-              {errors.company && <Error>{errors.company}</Error>}
-              <Input>
-                <label htmlFor="company">Empresa</label>
-                <input
-                  type="text"
-                  id="company"
-                  placeholder="Nombre de empresa"
-                  name="company"
-                  value={company}
-                  onChange={handleChange}
-                />
-              </Input>
-              <Input>
-                <label htmlFor="image">Imagen</label>
-                <FileUploader
-                  accept="image/*"
-                  id="image"
-                  name="image"
-                  randomizeFilename
-                  storageRef={firebase.storage.ref("products")}
-                  onUploadStart={handleUploadStart}
-                  onUploadError={handleUploadError}
-                  onUploadSuccess={handleUploadSuccess}
-                  onProgress={handleProgress}
-                />
-              </Input>
-              {errors.url && <Error>{errors.url}</Error>}
-              <Input>
-                <label htmlFor="url">Empresa</label>
-                <input
-                placeholder="URL de tu producto"
-                  type="url"
-                  id="url"
-                  name="url"
-                  value={url}
-                  onChange={handleChange}
-                />
-              </Input>
-            </fieldset>
-            <fieldset>
-              <legend>
-                Sobre tu producto
-              </legend>
-              {errors.description && <Error>{errors.description}</Error>}
-              <Input>
-                <label htmlFor="description">Descripción</label>
-                <textarea
-                  id="description"
-                  placeholder="Nombre de empresa"
-                  name="description"
-                  value={description}
-                  onChange={handleChange}
-                />
-              </Input>
-            </fieldset>
-            <InputSubmitForm type="submit" value="Crear producto" />
-          </Form>
-          {success && <Success>Cuenta creada correctamente</Success>}
+          <MDBContainer>
+            <MDBRow>
+              <MDBCol md="6" className="mx-auto mt-5">
+                <Form onSubmit={handleSubmit} noValidate>
+                  <p className="h3 text-center mb-4">Nuevo producto</p>
+                  <div className="grey-text">
+                    {errors.name && (
+                      <MDBBadge color="danger">{errors.name}</MDBBadge>
+                    )}
+                    <MDBInput
+                      label="Nombre del producto"
+                      icon="user"
+                      group
+                      type="text"
+                      validate
+                      error="wrong"
+                      success="right"
+                      id="name"
+                      name="name"
+                      value={name}
+                      onChange={handleChange}
+                    />
+                    {errors.company && (
+                      <MDBBadge color="danger">{errors.company}</MDBBadge>
+                    )}
+                    <MDBInput
+                      label="Nombre de empresa"
+                      icon="envelope"
+                      group
+                      type="text"
+                      validate
+                      error="wrong"
+                      success="right"
+                      id="company"
+                      name="company"
+                      value={company}
+                      onChange={handleChange}
+                    />
+                    <div className="input-group">
+                      <div className="input-group-prepend">
+                        <span className="input-group-text" id="inputGroupFileAddon01">
+                          Upload
+                        </span>
+                      </div>
+                      <div className="custom-file">
+                        <FileUploader
+                        className="custom-file-input"
+                        accept="image/*"
+                        id="image"
+                        name="image"
+                        randomizeFilename
+                        storageRef={firebase.storage.ref("products")}
+                        onUploadStart={handleUploadStart}
+                        onUploadError={handleUploadError}
+                        onUploadSuccess={handleUploadSuccess}
+                        onProgress={handleProgress}
+                      />
+                        <label className="custom-file-label">
+                          {currentPathImage}
+                        </label>
+                      </div>
+                    </div>
+                    <Input>
+                    </Input>
+                    {errors.url && (
+                      <MDBBadge color="danger">{errors.url}</MDBBadge>
+                    )}
+                    <MDBInput
+                      label="URL de producto"
+                      icon="tag"
+                      group
+                      type="url"
+                      validate
+                      error="wrong"
+                      success="right"
+                      id="url"
+                      name="url"
+                      value={url}
+                      onChange={handleChange}
+                    />
+                    {errors.description && (
+                      <MDBBadge color="danger">{errors.description}</MDBBadge>
+                    )}
+                    <MDBInput
+                      type="textarea"
+                      rows="2"
+                      label="Descripción"
+                      icon="pencil-alt"
+                      id="description"
+                      name="description"
+                      value={description}
+                      onChange={handleChange}
+                    />
+                  </div>
+                  <div className="text-center">
+                    <MDBBtn color="elegant" type="submit">
+                      Crear producto{" "}
+                      <MDBIcon far icon="paper-plane" className="ml-1" />
+                    </MDBBtn>
+                  </div>
+                </Form>
+                {success && (
+                  <MDBBadge color="success">
+                    Producto creado correctamente
+                  </MDBBadge>
+                )}
+              </MDBCol>
+            </MDBRow>
+          </MDBContainer>
         </>
       </Layout>
     </div>

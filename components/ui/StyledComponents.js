@@ -1,18 +1,5 @@
 import styled from '@emotion/styled';
 
-export const HeaderContainer = styled.div`
-    max-width: 1200px;
-    width: 95%;
-    margin: 0 auto;
-    @media (min-width:768px) {
-        display: flex;
-        justify-content: space-between;
-    }
-`;
-export const HeaderStyled = styled.header`
-    border-bottom: 2px solid var(--gris3);
-    padding: 1rem 0;
-`;
 export const Logo = styled.p`
     color: var(--naranja);
     font-size: 3rem;
@@ -24,34 +11,6 @@ export const Logo = styled.p`
     &:hover {
         cursor: pointer;
     }
-`;
-export const DivAccount = styled.div`
-    display: flex;
-    align-items: center;
-`;
-export const DivAccountName = styled.p`
-    margin-right: 2rem;
-`;
-export const Button = styled.a`
-font-weight: 700;
-text-transform: uppercase;
-border: 1px solid #d1d1d1;
-padding: .8rem 2rem;
-margin-right: 1rem;
-background-color: ${props => props.bgColor ? '#DA552F' : 'white'};
-color: ${props => props.bgColor ? 'white' : '#000'};
-
-&:last-of-type {
-    margin-right: 0;
-}
-
-&&:hover {
-    cursor: pointer;
-}
-`;
-export const LeftDivContainer = styled.div`
-    display:flex;
-    align-items: center;
 `;
 export const FormHeader = styled.form`
     position: relative;
@@ -77,30 +36,6 @@ export const InputSubmit = styled.button`
 
     &:hover {
         cursor: pointer;
-    }
-`;
-export const NavHeader = styled.nav`
-    padding-left: 2rem;
-    a {
-        font-size: 1.8rem;
-        margin-left: 2rem;
-        color: var(--gris2);
-        font-family: 'PT Sans', sans-serif;
-
-        &:last-of-type {
-            margin-right: 0;
-        }
-    }
-`;
-export const Form = styled.form`
-    max-width: 600px;
-    width: 95%;
-    margin: 5rem auto 0 auto;
-    fieldset {
-        margin: 1rem 0;
-        border: 1px solid #e1e1e1;
-        font-size: 2rem;
-        padding: 2rem;
     }
 `;
 export const Input = styled.div`
@@ -136,27 +71,22 @@ export const InputSubmitForm = styled.input`
         cursor: pointer;
     }
 `;
-export const H1Center = styled.h1`
-    text-align: center;
-    margin-top: 5rem;
+export const Form = styled.form`
+    input:focus:not([readonly]) {
+        border-bottom: 1px solid #ff8a65  !important;
+        box-shadow: 0 1px 0 0 #ff8a65  !important;
+    }
+    i.active, label.active {
+        color: #ff8a65  !important;
+    }
+    textarea:focus:not([readonly]) {
+        border-bottom: 1px solid #ff8a65  !important;
+        box-shadow: 0 1px 0 0 #ff8a65  !important;
+    }
+    .logo-icon {
+    color: #ff8a65 !important;
+    }
+    input.input-file {
+        
+    }
 `;
-export const Error = styled.p`
-    background-color: red;
-    padding: 0.5rem;
-    font-family:  'PT-Sans', sans-serif;
-    font-weight: 700;
-    font-size: 1.4rem;
-    color: #FFF;
-    text-align: center;
-    margin: 2rem 0 1rem 0;
-`;
-export const Success = styled.p`
-    background-color: green;
-    padding: 0.5rem;
-    font-family:  'PT-Sans', sans-serif;
-    font-weight: 700;
-    font-size: 1.4rem;
-    color: #FFF;
-    text-align: center;
-    margin: 2rem 0 1rem 0;
-`

@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import Layout from '../components/layout/Layout'
 import Router from 'next/router';
+import { Form } from '../components/ui/StyledComponents';
 import { MDBContainer, MDBRow, MDBCol, MDBBtn, MDBInput, MDBBadge } from 'mdbreact';
 
 import firebase from '../firebase';
@@ -46,7 +47,7 @@ const NewAccount = () => {
         <MDBContainer>
           <MDBRow>
             <MDBCol md="6" className="mx-auto mt-5">
-              <form onSubmit={handleSubmit} noValidate>
+              <Form onSubmit={handleSubmit} noValidate>
                 <p className="h3 text-center mb-4">Registrarse</p>
                 <div className="grey-text">
                   {errors.name && (
@@ -102,7 +103,7 @@ const NewAccount = () => {
                     Crear cuenta
                   </MDBBtn>
                 </div>
-              </form>
+              </Form>
               {success && (
                 <MDBBadge color="success">Cuenta creada correctamente</MDBBadge>
               )}
