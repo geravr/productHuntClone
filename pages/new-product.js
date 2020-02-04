@@ -200,8 +200,7 @@ const NewProduct = () => {
                   </div>
                   <div className="text-center">
                     <MDBBtn color="elegant" type="submit">
-                      Crear producto{" "}
-                      <MDBIcon far icon="paper-plane" className="ml-1" />
+                      Crear producto
                     </MDBBtn>
                   </div>
                 </Form>
