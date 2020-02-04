@@ -17,7 +17,7 @@ const MyApp = props => {
             user
         }}
         >
-            <Component {...pageProps} />
+        <Component {...pageProps} />
         </FirebaseContext.Provider>
     )
 }

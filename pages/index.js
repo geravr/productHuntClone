@@ -1,7 +1,10 @@
 import React, { useEffect, useState, useContext } from 'react';
 import Layout from '../components/layout/Layout';
+import ProductDetails from '../components/layout/ProductDetails';
 import { FirebaseContext } from '../firebase';
 
+//MDB REACT
+import {  MDBRow, MDBCard, MDBCardBody } from "mdbreact";
 
 const Home = () => {
 
@@ -28,11 +31,22 @@ const Home = () => {
 
   return (
     <div>
-    <Layout>
-      <h1>Inicio</h1>
-    </Layout>
+      <Layout>
+          <MDBCard
+            className="my-5 px-5 mx-auto"
+            style={{ fontWeight: 300, maxWidth: "90%" }}
+          >
+            <MDBCardBody style={{ paddingTop: 20 }}>
+              <MDBRow>
+                {products.map(product => (
+                  <ProductDetails key={product.id} product={product} />
+                ))}
+              </MDBRow>
+            </MDBCardBody>
+          </MDBCard>
+      </Layout>
     </div>
-  )
+  );
 }
 
 export default Home;

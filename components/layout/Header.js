@@ -1,22 +1,19 @@
 import React, { useState, useEffect, useContext } from 'react';
 import Link from 'next/link';
 import { FirebaseContext } from '../../firebase';
-
 import { Logo } from '../ui/StyledComponents';
+
+//MDB REACT
 import { MDBNavbar, MDBNavbarBrand, MDBNavbarNav, MDBNavItem, MDBNavbarToggler, MDBCollapse, MDBFormInline,
     MDBDropdown, MDBDropdownToggle, MDBDropdownMenu, MDBDropdownItem, MDBContainer, MDBIcon, MDBBtn } from "mdbreact";
 
-
-
-
 const Header = () => {
 
-       //URL Actual
-       const [ currentPath, setCurrentPath ] = useState('');
-       useEffect(() =>{
-           setCurrentPath(window.location.pathname);
-       });
-
+    //URL Actual
+    const [ currentPath, setCurrentPath ] = useState('');
+    useEffect(() =>{
+        setCurrentPath(window.location.pathname);
+    });
 
     const [ collapseID, setCollapseID ] = useState('');
 
@@ -26,8 +23,8 @@ const Header = () => {
     }));
 
     const { user, firebase } = useContext(FirebaseContext);
-    return ( 
-        <MDBNavbar color="orange darken-4" dark expand="md">
+    return (
+      <MDBNavbar color="orange darken-4" dark expand="md">
         <MDBContainer>
           <MDBNavbarBrand>
             <Logo className="white-text">P</Logo>
@@ -79,29 +76,41 @@ const Header = () => {
                     </MDBDropdownToggle>
                     <MDBDropdownMenu className="dropdown-default" right>
                       <MDBDropdownItem href="#!">My account</MDBDropdownItem>
-                      <MDBDropdownItem href="#!" onClick={() => firebase.logout()}>Log out</MDBDropdownItem>
+                      <MDBDropdownItem
+                        href="#!"
+                        onClick={() => firebase.logout()}
+                      >
+                        Log out
+                      </MDBDropdownItem>
                     </MDBDropdownMenu>
                   </MDBDropdown>
                 </MDBNavItem>
               ) : (
-                  <>
+                <>
                   <MDBNavItem>
-                  <Link href="/login">
-                    <a><MDBBtn color="white" size="sm">Login</MDBBtn></a>
-                  </Link>
+                    <Link href="/login">
+                      <a>
+                        <MDBBtn color="white" size="sm">
+                          Login
+                        </MDBBtn>
+                      </a>
+                    </Link>
                   </MDBNavItem>
                   <MDBNavItem>
-                  <Link href="/new-account">
-                      <a><MDBBtn outline color="white" size="sm">Crear Cuenta</MDBBtn></a>
-                  </Link>
+                    <Link href="/new-account">
+                      <a>
+                        <MDBBtn outline color="white" size="sm">
+                          Crear Cuenta
+                        </MDBBtn>
+                      </a>
+                    </Link>
                   </MDBNavItem>
-                  </>
+                </>
               )}
             </MDBNavbarNav>
           </MDBCollapse>
         </MDBContainer>
       </MDBNavbar>
-
-     );
+    );
 }
 export default Header;

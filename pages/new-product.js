@@ -1,15 +1,17 @@
 import React, { useState, useContext, useEffect } from 'react'
 import Layout from '../components/layout/Layout'
-import Router, { useRouter } from 'next/router';
+import { useRouter } from 'next/router';
 import FileUploader from 'react-firebase-file-uploader';
 import { Form, Input } from '../components/ui/StyledComponents';
-import { MDBContainer, MDBRow, MDBCol, MDBBtn, MDBIcon, MDBInput, MDBBadge } from 'mdbreact';
 
 import { FirebaseContext } from '../firebase';
 
 // Validaciones
 import useValidation from '../hooks/useValidation';
 import validateNewProduct from '../validation/validateNewProduct';
+
+//MDB REACT
+import { MDBContainer, MDBRow, MDBCol, MDBBtn, MDBIcon, MDBInput, MDBBadge } from 'mdbreact';
 
 const INITIAL_STATE = {
   name: '',
@@ -144,30 +146,32 @@ const NewProduct = () => {
                     />
                     <div className="input-group">
                       <div className="input-group-prepend">
-                        <span className="input-group-text" id="inputGroupFileAddon01">
+                        <span
+                          className="input-group-text"
+                          id="inputGroupFileAddon01"
+                        >
                           Upload
                         </span>
                       </div>
                       <div className="custom-file">
                         <FileUploader
-                        className="custom-file-input"
-                        accept="image/*"
-                        id="image"
-                        name="image"
-                        randomizeFilename
-                        storageRef={firebase.storage.ref("products")}
-                        onUploadStart={handleUploadStart}
-                        onUploadError={handleUploadError}
-                        onUploadSuccess={handleUploadSuccess}
-                        onProgress={handleProgress}
-                      />
+                          className="custom-file-input"
+                          accept="image/*"
+                          id="image"
+                          name="image"
+                          randomizeFilename
+                          storageRef={firebase.storage.ref("products")}
+                          onUploadStart={handleUploadStart}
+                          onUploadError={handleUploadError}
+                          onUploadSuccess={handleUploadSuccess}
+                          onProgress={handleProgress}
+                        />
                         <label className="custom-file-label">
                           {currentPathImage}
                         </label>
                       </div>
                     </div>
-                    <Input>
-                    </Input>
+                    <Input></Input>
                     {errors.url && (
                       <MDBBadge color="danger">{errors.url}</MDBBadge>
                     )}

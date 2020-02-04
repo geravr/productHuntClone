@@ -1,16 +1,17 @@
 import React from 'react';
 import Header from './Header';
-import { Global, css } from '@emotion/core';
+import { Global } from '@emotion/core';
 import Head from 'next/head';
+
+//MDBReact
+import { MDBContainer } from 'mdbreact';
 
 
 const Layout = props => {
     return ( 
         <>
 
-            <Global
-            
-            />
+            <Global />
 
             <Head>
                 <html lang="es" />
@@ -23,7 +24,9 @@ const Layout = props => {
             <Header />
 
             <main>
-                {props.children}
+                <MDBContainer>
+                    {props.children}
+                </MDBContainer>
             </main>
         </>
 

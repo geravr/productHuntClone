@@ -2,13 +2,15 @@ import React, { useState } from 'react'
 import Layout from '../components/layout/Layout'
 import Router from 'next/router';
 import { Form } from '../components/ui/StyledComponents';
-import { MDBContainer, MDBRow, MDBCol, MDBBtn, MDBInput, MDBBadge } from 'mdbreact';
 
 import firebase from '../firebase';
 
 // Validaciones
 import useValidation from '../hooks/useValidation';
 import validateNewAccount from '../validation/validateNewAccount';
+
+//MDB REACT
+import { MDBContainer, MDBRow, MDBCol, MDBBtn, MDBInput, MDBBadge } from 'mdbreact';
 
 const INITIAL_STATE = {
   name: '',

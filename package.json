@@ -1,5 +1,5 @@
 {
-  "name": "petro-app-next",
+  "name": "product-hunt-next",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -13,6 +13,7 @@
     "@emotion/core": "^10.0.27",
     "@emotion/styled": "^10.0.27",
     "babel-plugin-emotion": "^10.0.27",
+    "date-fns": "^2.9.0",
     "firebase": "^7.7.0",
     "firebase-admin": "^8.9.1",
     "mdbreact": "^4.25.0",
