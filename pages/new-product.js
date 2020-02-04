@@ -2,7 +2,7 @@ import React, { useState, useContext, useEffect } from 'react'
 import Layout from '../components/layout/Layout'
 import Router, { useRouter } from 'next/router';
 import FileUploader from 'react-firebase-file-uploader';
-import { Form, Input, InputSubmitForm, H1Center, Error, Success } from '../components/ui/StyledComponents';
+import { Form, Input } from '../components/ui/StyledComponents';
 import { MDBContainer, MDBRow, MDBCol, MDBBtn, MDBIcon, MDBInput, MDBBadge } from 'mdbreact';
 
 import { FirebaseContext } from '../firebase';
@@ -10,12 +10,11 @@ import { FirebaseContext } from '../firebase';
 // Validaciones
 import useValidation from '../hooks/useValidation';
 import validateNewProduct from '../validation/validateNewProduct';
-import firebaseConfig from '../firebase/config';
 
 const INITIAL_STATE = {
   name: '',
   company: '',
-  //image: '',
+  image: '',
   url: '',
   description: ''
 }
@@ -24,10 +23,47 @@ const INITIAL_STATE = {
 const NewProduct = () => {
 
   // State de imagenes
-  const [ imageName, setImageName ] = useState('Selecciona una imagen');
+  const [ imageName, setImageName ] = useState('');
   const [ uploading, setUploading ] = useState(false);
   const [ progress, setProgress ] = useState(0);
   const [ imageUrl, setImageUrl ] = useState('');
+
+  
+  // const [error, setError] = useState(false);
+  const [success, setSuccess] = useState(false);
+
+  const { values, errors, handleSubmit, handleChange } = useValidation(INITIAL_STATE, validateNewProduct, newProduct);
+
+  const { name, company, image, url, description } = values;
+
+  // Hook de routing para redireccionar
+  const router = useRouter();
+
+  // Context con operaciones crud de firebase
+  const { user, firebase } = useContext(FirebaseContext);
+
+  async function newProduct() {
+    // Si el usuario no está autenticado llevar a login
+    if(!user) {
+     return router.push('/login')
+    }
+
+    // Crear objeto de nuevo producto
+    const product = {
+      name,
+      company,
+      url,
+      imageUrl,
+      description,
+      productVotes : 0,
+      comments: [],
+      date: Date.now()
+    }
+
+    // Insertar en la base de datos
+    firebase.db.collection('products').add(product);
+    return router.push('/')
+  }
 
   const handleUploadStart = () => {
     setProgress(0);
@@ -55,42 +91,6 @@ const NewProduct = () => {
           setImageUrl(url);
         });
   };
-
-
-  // const [error, setError] = useState(false);
-  const [success, setSuccess] = useState(false);
-
-  const { values, errors, handleSubmit, handleChange } = useValidation(INITIAL_STATE, validateNewProduct, newProduct);
-
-  const { name, company, image, url, description } = values;
-
-  // Hook de routing para redireccionar
-  const router = useRouter();
-
-  // Context con operaciones crud de firebase
-  const { user, firebase } = useContext(FirebaseContext);
-
-  async function newProduct() {
-    // Si el usuario no está autenticado llevar a login
-    if(!user) {
-     return router.push('/login')
-    }
-
-    // Crear objeto de nuevo producto
-    const product = {
-      name,
-      company,
-      imageUrl,
-      description,
-      productVotes : 0,
-      comments: [],
-      date: Date.now()
-    }
-
-    // Insertar en la base de datos
-    firebase.db.collection('products').add(product);
-    return router.push('/')
-  }
 
   //Path de imagen
   const [ currentPathImage, setCurrentPathImage ] = useState('Selecciona una imagen');
