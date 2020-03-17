@@ -90,3 +90,28 @@ export const Form = styled.form`
         
     }
 `;
+export const TitleProduct = styled.a`
+    font-size: 1.2rem;
+    font-weight: bold;
+    margin: 0;
+
+    :hover {
+        cursor: pointer;
+    }
+`;
+export const DescriptionProduct = styled.p`
+    font-weight: 400;
+`;
+export const TitleH1 = styled.h1`
+    margin-top: 4rem;
+    margin-bottom: 2rem;
+    text-align: center;
+    font-weight: bold;
+`;
+export const TitleH5 = styled.h5`
+    font-weight: bold;
+`;
+export const Divisor = styled.div`
+    border-bottom: 1px solid #e0e0e0;
+    margin: 1rem 0 1rem 0;
+`;

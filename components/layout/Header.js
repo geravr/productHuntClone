@@ -27,7 +27,9 @@ const Header = () => {
       <MDBNavbar color="orange darken-4" dark expand="md">
         <MDBContainer>
           <MDBNavbarBrand>
-            <Logo className="white-text">P</Logo>
+            <Link href="/">
+              <Logo className="white-text">P</Logo>
+            </Link>
           </MDBNavbarBrand>
           <MDBNavbarNav left>
             <MDBNavItem>

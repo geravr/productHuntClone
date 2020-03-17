@@ -1,14 +1,16 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import formatDistanceToNow from 'date-fns/formatDistanceToNow';
-import { es } from 'date-fns/locale'
+import { es } from 'date-fns/locale';
 import {  MDBRow, MDBCol, MDBMask, MDBIcon, MDBView } from "mdbreact";
+import { TitleProduct } from '../ui/StyledComponents';
+import Link from 'next/link';
 
 const ProductDetails = ({product}) => {
   
     const { id, comments, date, description, company, name, url, imageUrl, productVotes } = product;
 
     return (
-      <>
+      <Fragment>
         <MDBCol md="12">
           <div
             style={{
@@ -20,18 +22,20 @@ const ProductDetails = ({product}) => {
               <MDBCol md="2">
                 <MDBView hover rounded className="z-depth-1-half mb-4">
                   <img className="img-fluid img-thumbnail" src={imageUrl} alt="" />
-                  <a href="#!">
+                  <Link href="/products/[id]" as={`/products/${id}`}>
                     <MDBMask overlay="white-slight" className="waves-light" />
-                  </a>
+                  </Link>
                 </MDBView>
               </MDBCol>
               <MDBCol md="9">
-                <h5>{name}</h5>
+                <Link href="/products/[id]" as={`/products/${id}`}>
+                <TitleProduct>{name}</TitleProduct>
+                </Link>
                 <div className="d-flex justify-content-between">
                   <MDBCol size="11" className="text-truncate pl-0 mb-3">
-                    <a href="#!" className="dark-grey-text">
+                    <p className="dark-grey-text">
                       {description}
-                    </a>
+                    </p>
                   </MDBCol>
                   <MDBCol className="mt-n4">
                     <p className="text-center">
@@ -54,7 +58,7 @@ const ProductDetails = ({product}) => {
             </MDBRow>
           </div>
         </MDBCol>
-      </>
+      </Fragment>
     );
 }
  
